@@ -1,0 +1,32 @@
+version: '2'
+services:
+
+  conjur_master:
+    image: conjur-appliance:5-latest
+    container_name: conjur_master
+    build: ./build/conjur_master
+    ports:
+      - 443:443
+    security_opt:
+      - seccomp:unconfined
+    restart: always
+
+  cli:
+    container_name: conjur_cli
+    hostname: conjur_cli
+    image: cyberark/conjur-cli:5-latest
+    volumes:
+      - ./demo:/demo:z
+    entrypoint: sleep
+    command: infinity
+    restart: always
+
+  client:
+    image: client_node:latest
+    container_name: client_node
+    build: ./build/client_node
+    volumes:
+      - ./demo:/demo
+    entrypoint: sleep
+    command: infinity
+    restart: always
