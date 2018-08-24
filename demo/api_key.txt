@@ -1,1 +1,0 @@
-export CONJUR_AUTHN_API_KEY=39nbb6c20t9wdyz609zdz0tfash76d8y1xqs005f118rvn80vp5

@@ -1,5 +1,6 @@
 FROM ubuntu:14.04
 
+# install utilities & ansible
 RUN apt-get update -y \
     && apt-get install -y \
     curl \
@@ -7,10 +8,20 @@ RUN apt-get update -y \
     ansible \
     python-pip
 
-# install summon
+# install chef 
 RUN cd /tmp \
     && curl -L https://www.opscode.com/chef/install.sh | bash \
-    && curl -sSL https://raw.githubusercontent.com/cyberark/summon/master/install.sh | bash 
+    && mkdir /var/chef 
+
+# install Summon and the Summon-conjur provider
+RUN cd /tmp \
+    && curl -LO https://github.com/cyberark/summon/releases/download/v0.6.7/summon-linux-amd64.tar.gz \
+    && tar xzf summon-linux-amd64.tar.gz && mv summon /usr/local/bin/ \
+    && rm summon-linux-amd64.tar.gz \
+    && mkdir -p /usr/local/lib/summon \
+    && curl -LO https://github.com/cyberark/summon-conjur/releases/download/v0.5.2/summon-conjur-linux-amd64.tar.gz \
+    && tar xzf summon-conjur-linux-amd64.tar.gz && mv summon-conjur /usr/local/lib/summon/ \
+    && rm summon-conjur-linux-amd64.tar.gz
 
 # install terraform
 RUN cd /tmp \
@@ -19,11 +30,11 @@ RUN cd /tmp \
     && mv terraform /usr/local/bin \
     && rm terraform*.zip
 
-# create critical directories
-RUN mkdir /var/chef \
-    && mkdir /usr/local/lib/summon
-
-COPY ./conjur_summon_provider.sh /usr/local/lib/summon/summon-conjur.sh
+# install concourse fly cli
+RUN cd /tmp \
+    && curl -LO https://github.com/concourse/fly/releases/download/v4.0.0-rc.93/fly_linux_amd64 \
+    && mv /tmp/fly_linux_amd64 /usr/local/bin/fly \
+    && chmod +x /usr/local/bin/fly
 
 RUN echo "root:demo" | chpasswd		# set demo as root password
 

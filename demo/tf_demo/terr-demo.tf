@@ -1,18 +1,18 @@
-variable "db_uname" {
+variable "DB_UNAME" {
   description = "Database user name"
   default = "default"
 }
 
-variable "db_pwd" {
+variable "DB_PWD" {
   description = "Database password"
   default = "default"
 }
 
 output "DB Uname" {
-  value = "${var.db_uname}"
+  value = "${var.DB_UNAME}"
 }
 
 output "DB Password" {
   sensitive = true
-  value = "${var.db_pwd}"
+  value = "${var.DB_PWD}"
 }
