@@ -7,8 +7,10 @@ CONJUR_ADMIN_PASSWORD=Cyberark1
 CONJUR_ORG_ACCOUNT=dev
 
 main() {
-#  startup_conjur
+  startup_conjur
   conjurize_client_node
+  clear
+  echo "cd to /demo..."
   docker exec -it client_node bash
 }
 

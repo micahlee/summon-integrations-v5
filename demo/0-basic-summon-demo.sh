@@ -10,6 +10,5 @@ echo
 echo "Here are the secrets Summon retrieves for the $1 environment:"
 summon -e $1 ./secrets_echo.sh
 echo
-echo "An Ansible can access these environment vars locally."
-set -x
-summon -e $1 ansible-playbook -i inventory.yml demoPlaybook.yml
+echo "The subdirectories show how Ansible, Chef and Terraform can access secrets in env vars."
+echo
