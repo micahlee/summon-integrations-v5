@@ -8,7 +8,7 @@ CONJUR_ORG_ACCOUNT=dev
 
 main() {
   startup_conjur
-  conjurize_client_node
+  initialize_client_node
   clear
   echo "cd to /demo..."
   docker exec -it client_node bash
@@ -26,12 +26,13 @@ startup_conjur() {
   docker exec $CONJUR_BUILD_CONTAINER_NAME evoke configure master -h $CONJUR_MASTER_NAME -p $CONJUR_ADMIN_PASSWORD $CONJUR_ORG_ACCOUNT
 }
 
-conjurize_client_node() {
+initialize_client_node() {
   docker exec -it conjur_cli bash -x /demo_root/init.sh
   docker cp ./conjur-$CONJUR_ORG_ACCOUNT.pem client_node:/etc
   docker cp ./conjur.conf client_node:/etc
   docker cp ./conjur.identity client_node:/etc
   rm ./conjur*
+  docker exec -it client_node terraform init
 }
 
 main $@

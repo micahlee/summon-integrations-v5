@@ -23,12 +23,17 @@ RUN cd /tmp \
     && tar xzf summon-conjur-linux-amd64.tar.gz && mv summon-conjur /usr/local/lib/summon/ \
     && rm summon-conjur-linux-amd64.tar.gz
 
-# install terraform
+# install terraform & terraform provider
 RUN cd /tmp \
     && curl -O https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip \
     && unzip terraform_0.11.7_linux_amd64.zip \
     && mv terraform /usr/local/bin \
-    && rm terraform*.zip
+    && rm terraform*.zip \
+    && wget https://github.com/cyberark/terraform-provider-conjur/releases/download/v0.2.0/terraform-provider-conjur-linux-amd64.tar.gz \
+    && tar xvzf terraform-provider-conjur-linux-amd64.tar.gz \
+    && rm terraform-provider-conjur-linux-amd64.tar.gz \
+    && mkdir -p ~/.terraform.d/plugins \
+    && mv terraform-provider-conjur ~/.terraform.d/plugins
 
 # install concourse fly cli
 RUN cd /tmp \
