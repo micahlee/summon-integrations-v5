@@ -1,7 +1,7 @@
 version: '2'
 services:
 
-  conjur_master:
+  conjur-master:
     image: conjur-appliance:5-latest
     container_name: conjur_master
     build: ./build/conjur_master

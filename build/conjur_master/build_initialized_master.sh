@@ -5,7 +5,7 @@ if [[ $# -ne 1 ]]; then
 fi
 CONJUR_COMMIT_IMAGE=$1
 CONJUR_BASE_IMAGE=registry2.itci.conjur.net/conjur-appliance:5.0-stable
-CONJUR_MASTER_NAME=conjur_master
+CONJUR_MASTER_NAME=conjur-master
 CONJUR_BUILD_CONTAINER_NAME=conjur_master
 CONJUR_ADMIN_PASSWORD=Cyberark1
 CONJUR_ORG_ACCOUNT=dev

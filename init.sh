@@ -6,7 +6,7 @@
 # - initializes variables 
 # - creates conjur* conjurization files in the mounted fs
 
-CONJUR_HOSTNAME=conjur_master
+CONJUR_HOSTNAME=conjur-master
 CONJUR_ORG_ACCOUNT=dev
 CONJUR_ADMIN_UNAME=admin
 CONJUR_ADMIN_PWD=Cyberark1

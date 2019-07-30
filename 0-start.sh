@@ -2,7 +2,7 @@
 set -eo pipefail
 CONJUR_MASTER_IMAGE=conjur-appliance:5-intlzd
 CONJUR_BUILD_CONTAINER_NAME=conjur_master
-CONJUR_MASTER_NAME=conjur_master
+CONJUR_MASTER_NAME=conjur-master
 CONJUR_ADMIN_PASSWORD=Cyberark1
 CONJUR_ORG_ACCOUNT=dev
 
