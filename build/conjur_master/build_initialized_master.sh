@@ -16,7 +16,8 @@ docker run -d --restart always \
 		-p "443:443" -p "636:636" -p "5432:5432" -p "5433:5433" \
 		$CONJUR_BASE_IMAGE
 
-docker exec $CONJUR_BUILD_CONTAINER_NAME evoke configure master -h $CONJUR_MASTER_NAME -p $CONJUR_ADMIN_PASSWORD $CONJUR_ORG_ACCOUNT
+docker exec $CONJUR_BUILD_CONTAINER_NAME evoke configure master --accept-eula \
+	-h $CONJUR_MASTER_NAME -p $CONJUR_ADMIN_PASSWORD $CONJUR_ORG_ACCOUNT
 
 sleep 5
 docker exec $CONJUR_BUILD_CONTAINER_NAME sv stop conjur

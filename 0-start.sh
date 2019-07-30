@@ -23,7 +23,8 @@ build_initialized_image() {
 
 startup_conjur() {
   docker-compose up -d
-  docker exec $CONJUR_BUILD_CONTAINER_NAME evoke configure master -h $CONJUR_MASTER_NAME -p $CONJUR_ADMIN_PASSWORD $CONJUR_ORG_ACCOUNT
+  docker exec $CONJUR_BUILD_CONTAINER_NAME evoke configure master --accept-eula \
+    -h $CONJUR_MASTER_NAME -p $CONJUR_ADMIN_PASSWORD $CONJUR_ORG_ACCOUNT
 }
 
 initialize_client_node() {
